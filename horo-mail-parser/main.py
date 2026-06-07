@@ -5,7 +5,8 @@ import json
 
 website = "https://horo.mail.ru/prediction/CHOICE/today/?frommail=1"
 
-def choice_sign(website):
+"""Take user input and modify webpage to user's preference"""
+def choice_sign(website : str) -> str:
     print()
     descr = """Choose your horoscope sign and write its number:
         Signs: 
@@ -50,8 +51,8 @@ def choice_sign(website):
     
     webpage = website.replace("CHOICE", dct[user_choice])
     return webpage
-       
 
+"""Get page content using requests and BeautifulSoup"""       
 def request_horo(webpage):
     headers = {
         "Accept": "text/html",
@@ -64,7 +65,7 @@ def request_horo(webpage):
     
     return soup
 
-
+"""Get neccessary information about sign"""
 def parsing_info(soup):
     header = soup.find("title").text
     print(header, "\n")
@@ -88,7 +89,7 @@ def parsing_info(soup):
         else:
             print("Not found")
 
+
 web = choice_sign(website)
 soup = request_horo(web)
 parsing_info(soup)
-    
